@@ -6,9 +6,9 @@ body {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(12, 1fr);
-  gap: 7px;
+  gap: 15px;
   height: 100vh;
-  padding: 10 px;
+  padding: 17px;
 }
 
 .box {
@@ -33,7 +33,7 @@ body {
 .box-3 { grid-column: 10 / 13; grid-row: 7 / 13; }
 
 .box-1 img { object-position: center; }
-.box-2 img { object-position: top left; }
+.box-2 img { object-position: bottom left; }
 .box-3 img { object-position: right; }
 .box-4 img { object-position: right; }
 .box-5 img { object-position: center; }
