@@ -38,6 +38,21 @@ h5 {
   margin: 0 auto;
 }
 
+.corner-logo {
+  position: fixed;
+  top: 0;
+  left: 20px;
+  z-index: 2000;
+  display: block;
+}
+
+.corner-logo img {
+  display: block;
+  width: clamp(120px, 14vw, 200px);
+  height: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+}
+
 .bottom-nav {
   position: fixed;
   left: 50%;
@@ -116,7 +131,6 @@ h5 {
   background: linear-gradient(transparent, var(--ow-bg));
 }
 
-/* Landing  */
 .home-inner {
   position: relative;
   z-index: 10;
@@ -208,7 +222,6 @@ h5 {
   pointer-events: none;
 }
 
-/* Search result card */
 .champ-card {
   display: none;
   width: 100%;

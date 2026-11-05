@@ -17,13 +17,15 @@
 
 <body>
 
-  <!-- Navbar -->
+  <a href="#home" class="corner-logo" id="cornerLogo">
+    <img src="assets/logo.png" alt="Overwatch">
+  </a>
+
   <nav class="bottom-nav">
     <a href="#home" id="navHome">HOME</a>
     <a href="#gallery">LIST</a>
   </nav>
 
-  <!-- Landing Page -->
   <section class="section-bg" id="home">
 
     <video id="homeVideo" class="home-video" autoplay muted loop playsinline preload="auto">
@@ -42,12 +44,10 @@
     </div>
   </section>
 
-  <!-- List Page -->
   <section id="gallery">
     <div class="wrap">
       <h2 class="gallery-title">HEROES</h2>
 
-      <!-- Pagination Controls -->
       <div class="pager">
         <ul class="pagination pagination-lg">
           <li class="page-item"><a class="page-link" onclick="prevHeroPage()"><span
@@ -59,13 +59,11 @@
       <p id="heroPageText">Page 1</p>
     </div>
 
-    <!-- Hero Panels-->
     <div class="collage-container" id="heroListArea">
       <div class="state-msg">Loading heroes…</div>
     </div>
   </section>
 
-  <!-- Disclaimer -->
   <footer class="wrap">
     <h5>
       Disclaimer: <br> This website is intended for educational purposes only. All content, characters,
@@ -95,12 +93,11 @@
     const heroDetailsCache = new Map();
     const perPage = 6;
 
-    /*  helpers */
     const esc = s => String(s ?? "").replace(/[&<>"']/g, ch =>
       ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
 
     // "Lúcio" -> "lucio", "D.Va" -> "dva", "Soldier: 76" -> "soldier76"
-    const norm = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "")
+    const norm = s => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "")
       .toLowerCase().replace(/[^a-z0-9]/g, "");
 
     function hueOf(name) {
@@ -143,7 +140,6 @@
       </div>`;
     }
 
-    /* search result card  */
     function tileHTML(h) {
       return `
         <div class="hero-tile">
@@ -189,7 +185,6 @@
       return request;
     }
 
-    /* load data */
     function loadHeroes() {
       listArea.innerHTML = `<div class="state-msg">Loading heroes…</div>`;
       return fetch(`${API_BASE}/heroes`)
@@ -226,7 +221,6 @@
         });
     }
 
-    /* search */
     window.addEventListener("load", () => logo.classList.add("fade-in"));
 
     input.addEventListener("keydown", e => {
@@ -294,7 +288,6 @@
       });
     }
 
-    /* vertical collage cards */
     function panelHTML(h, index) {
       const position = h.affiliation || "Hero";
       return `
@@ -335,7 +328,6 @@
       if (page > 1) { page--; renderPage(); }
     }
 
-    /* panel expand and close */
     function activatePanel(panel) {
       const container = panel.closest(".collage-container");
       if (!container || panel.classList.contains("active")) return;
@@ -392,7 +384,6 @@
       clearTimeout(slideTimer);
       isAnimating = false;
 
-      // video comes back
       homeSection.classList.remove("searched");
       if (homeVideo) homeVideo.play().catch(() => { });
 
@@ -408,6 +399,7 @@
       hint.classList.remove("error");
     }
     document.getElementById("navHome").addEventListener("click", resetLanding);
+    document.getElementById("cornerLogo").addEventListener("click", resetLanding);
 
     if (homeVideo && "IntersectionObserver" in window) {
       new IntersectionObserver(([entry]) => {
@@ -419,4 +411,5 @@
     loadHeroes();
   </script>
 </body>
+
 </html>
